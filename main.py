@@ -63,13 +63,11 @@ class Furry:
         try:
             req_url = requests.get(base)
             if not req_url.ok:
-                #print(f"Error fetching image from {base}: {req_url.status_code}")
                 return
 
             data = req_url.json()
             url = data.get('url', '')
             if not url:
-                #print(f"No image URL found in response from {base}")
                 return
 
             if url.lower().endswith('.png') or url.lower().endswith('.jpg'):
@@ -83,15 +81,11 @@ class Furry:
                             if not block:
                                 break
                             f.write(block)
-                    #print(f"Image saved to {filename}")
 
                     self.randomize_wallpapers()
-                else:
-                    #print(f"Skipping image due to size or format: {url}")
-            else:
-                #print(f"Skipping non-image file: {url}")
-        except Exception as e:
-            #print(f"Error parsing JSON response from {base}: {str(e)}")
+                else:pass
+            else:pass
+        except Exception as e:pass
 
     def randomize_list(self, lst):
         randomized_list = lst[:]
@@ -105,11 +99,7 @@ class Furry:
             selected_image = random.choice(images)
             try:
                 ctypes.windll.user32.SystemParametersInfoW(20, 0, selected_image, 0)
-                #print(f"Background set to {selected_image}")
-            except Exception as e:
-                #print(f"Error setting wallpaper: {str(e)}")
-        else:
-            #print("No images found in the temporary directory.")
+            except Exception as e:pass
 
 if __name__ == "__main__":
     instance = Furry()
